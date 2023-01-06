@@ -9,17 +9,14 @@ function App() {
   const [enteredKredi, setEnteredKredi] = useState("");
   const [enteredTaksit, setEnteredTaksit] = useState("");
   const [enteredKar, setEnteredKar] = useState("");
-  const [enteredKKDV, setEnteredKKDV] = useState("");
-  const [enteredBSMV, setEnteredBSMV] = useState("");
+  const [enteredKKDF, setEnteredKKDF] = useState("15");
+  const [enteredBSMV, setEnteredBSMV] = useState("5");
   const [enteredAralik, setEnteredAralik] = useState("");
 
-  const anapara = [];
-  const kalan_ananapara = [];
-  const kar_tutari = [];
-  const kkdv_tutari = [];
-  const bsmv_tutari = [];
-
-
+  const [toplam_vade, setToplamVade] = useState(0);
+  const [vade_tutari, setVadeTutari] = useState(0);
+  const [toplam_KKDF, setToplamKKDF] = useState(0);
+  const [toplam_BSMV, setToplamBSMV] = useState(0);
 
   return (
     <React.Fragment>
@@ -32,12 +29,12 @@ function App() {
             enteredKredi,
             enteredTaksit,
             enteredKar,
-            enteredKKDV,
+            enteredKKDF,
             enteredBSMV,
             enteredAralik,
             setEnteredAralik,
             setEnteredBSMV,
-            setEnteredKKDV,
+            setEnteredKKDF,
             setEnteredKar,
             setEnteredTaksit,
             setEnteredKredi,
@@ -45,11 +42,14 @@ function App() {
         >
           <TableContext.Provider
             value={{
-              anapara,
-              kalan_ananapara,
-              kar_tutari,
-              kkdv_tutari,
-              bsmv_tutari,
+              toplam_vade,
+              vade_tutari,
+              toplam_KKDF,
+              toplam_BSMV,
+              setToplamVade,
+              setVadeTutari,
+              setToplamKKDF,
+              setToplamBSMV,
             }}
           >
             <InstallmentForm />

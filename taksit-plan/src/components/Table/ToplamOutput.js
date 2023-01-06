@@ -7,26 +7,42 @@ import React, {
 import Container from "../UI/Container";
 import { MainContext } from "../../context/userdatacontext";
 import InstallmentTable from "./TableOutput";
+import { TableContext } from "../../context/tableContext";
 
 const TotalOutput = (props, ref) => {
   const [totalState, setTotalState] = useState(false);
   const [modal, setModal] = useState(false);
-  const {
-    enteredKredi,
-    enteredAralik,
-    enteredBSMV,
-    enteredKKDV,
-    enteredKar,
-    enteredTaksit,
-  } = useContext(MainContext);
+  const { enteredKredi, enteredBSMV, enteredKKDF, enteredKar, enteredTaksit } =
+    useContext(MainContext);
+  var {
+    toplam_KKDF,
+    toplam_BSMV,
+    setToplamVade,
+    setVadeTutari,
+    setToplamKKDF,
+    setToplamBSMV,
+  } = useContext(TableContext);
 
   const faiz = enteredKar / 100;
   const onetopower = Math.pow(1 + faiz, enteredTaksit);
 
   console.log("faiz: ", faiz);
 
-  const VadeTutar = enteredKredi * ((faiz * onetopower) / (onetopower - 1));
-  const ToplamVadeTutar = VadeTutar * enteredTaksit;
+  var VadeTutar = enteredKredi * ((faiz * onetopower) / (onetopower - 1));
+  var ToplamVadeTutar = VadeTutar * enteredTaksit;
+
+  var tahmini_kar = ToplamVadeTutar - enteredKredi;
+  setToplamKKDF(tahmini_kar * (enteredKKDF / 100));
+  setToplamBSMV(tahmini_kar * (enteredBSMV / 100));
+  var toplam_vergi = toplam_KKDF + toplam_BSMV;
+  ToplamVadeTutar = ToplamVadeTutar + toplam_vergi;
+  VadeTutar = ToplamVadeTutar / enteredTaksit;
+  ToplamVadeTutar = parseFloat(ToplamVadeTutar).toFixed(2);
+  VadeTutar = parseFloat(VadeTutar).toFixed(2);
+  toplam_vergi = parseFloat(toplam_vergi).toFixed(2);
+
+  setToplamVade(ToplamVadeTutar);
+  setVadeTutari(VadeTutar);
 
   useImperativeHandle(ref, () => ({
     openTotal: () => {
@@ -64,7 +80,7 @@ const TotalOutput = (props, ref) => {
                 <p className="block uppercase text-gray-700 text-xs font-bold ">
                   Toplam Vergi
                 </p>
-                <p className="text-lg"> {ToplamVadeTutar}</p>
+                <p className="text-lg"> {toplam_vergi}</p>
               </div>
             </div>
             <div className="text-center">
@@ -72,7 +88,7 @@ const TotalOutput = (props, ref) => {
                 className="bg-slate-800 hover:bg-blue-700 text-white font-bold rounded py-3 px-5 mb-3"
                 // onClick={() => setTotalState(false)}
                 onClick={() => setModal(true)}
->
+              >
                 Tabloyu Göster
               </button>
             </div>

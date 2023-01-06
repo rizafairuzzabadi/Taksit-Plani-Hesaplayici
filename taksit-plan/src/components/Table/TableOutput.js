@@ -1,23 +1,41 @@
 import React, { useContext } from "react";
-import Container from "../UI/Container";
 import "./TableOutput.css";
 import { MainContext } from "../../context/userdatacontext";
 import { TableContext } from "../../context/tableContext";
 
 const InstallmentTable = (props) => {
-  const {
-    enteredKredi,
-    enteredAralik,
-    enteredBSMV,
-    enteredKKDV,
-    enteredKar,
-    enteredTaksit,
-  } = useContext(MainContext);
+  const { enteredBSMV, enteredKKDF, enteredKar, enteredTaksit, enteredKredi } =
+    useContext(MainContext);
 
-  const { anapara, kalan_ananapara, kar_tutari, kkdv_tutari, bsmv_tutari } =
-    useContext(TableContext);
+  var {
+    toplam_vade,
+    vade_tutari,
+  } = useContext(TableContext);
 
-  const taksitNo = new Array(enteredTaksit).fill(0).map((_, i) => i + 1);
+  var tableObject = [];
+  var anapara = 0;
+  var kalan_anapara = enteredKredi;
+  var kar_tutari = 0;
+  var KKDF_tutari = 0;
+  var BSMV_tutari = 0;
+
+  for (var i = 0; i < enteredTaksit; i++) {
+    kar_tutari = kalan_anapara * (enteredKar / 100);
+    KKDF_tutari = kar_tutari * (enteredKKDF / 100);
+    BSMV_tutari = kar_tutari * (enteredBSMV / 100);
+    anapara = vade_tutari - (KKDF_tutari + BSMV_tutari+kar_tutari);
+    kalan_anapara = kalan_anapara - anapara;
+
+    tableObject[i] = {
+      taksitno: i + 1,
+      tTutar: parseFloat(vade_tutari).toFixed(2),
+      odenen: parseFloat(anapara).toFixed(2),
+      kalan: parseFloat(kalan_anapara).toFixed(2),
+      kar: parseFloat(kar_tutari).toFixed(2),
+      KKDFvrg: parseFloat(KKDF_tutari).toFixed(2),
+      BSMVvrg: parseFloat(BSMV_tutari).toFixed(2),
+    };
+  }
 
   if (!props.show) {
     return null;
@@ -55,11 +73,23 @@ const InstallmentTable = (props) => {
               </tr>
             </thead>
             <tbody>
-              {taksitNo.map((number) => (
-                <tr>
-                    <td>{number}</td>
+              {tableObject.map((item) => (
+                <tr className="text-center">
+                  <td>{item.taksitno}</td>
+                  <td>{item.tTutar}</td>
+                  <td>{item.odenen}</td>
+                  <td>{item.kalan}</td>
+                  <td>{item.kar}</td>
+                  <td>{item.KKDFvrg}</td>
+                  <td>{item.BSMVvrg}</td>
                 </tr>
               ))}
+              {/* {taksitNo.map((number) => (
+                <tr>
+                  <td>{number}</td>
+                  <td>{anapara}</td>
+                </tr>
+              ))} */}
             </tbody>
           </table>
         </div>

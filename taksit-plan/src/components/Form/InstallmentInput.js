@@ -1,30 +1,29 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useRef, useContext } from "react";
 import Container from "../UI/Container";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 import TotalOutput from "../Table/ToplamOutput";
 import { MainContext } from "../../context/userdatacontext";
-import InstallmentTable from "../Table/TableOutput";
 
 const InstallmentForm = (props) => {
   const krediInputRef = useRef();
   const taksitInputref = useRef();
   const karInputref = useRef();
-  const kkdvInputref = useRef();
-  const bsmvInputref = useRef();
+  const KKDFInputref = useRef();
+  const BSMVInputref = useRef();
   const aralikInputref = useRef();
   const totalRef = useRef();
 
   const {
     setEnteredAralik,
     setEnteredBSMV,
-    setEnteredKKDV,
+    setEnteredKKDF,
     setEnteredKar,
     setEnteredTaksit,
     setEnteredKredi,
     enteredAralik,
     enteredBSMV,
-    enteredKKDV,
+    enteredKKDF,
     enteredKar,
     enteredTaksit,
     enteredKredi,
@@ -46,11 +45,11 @@ const InstallmentForm = (props) => {
     setEnteredKar(event.target.value);
   };
 
-  const kkdvChangeHandler = (event) => {
-    setEnteredKKDV(event.target.value);
+  const KKDFChangeHandler = (event) => {
+    setEnteredKKDF(event.target.value);
   };
 
-  const bsmvChangeHandler = (event) => {
+  const BSMVChangeHandler = (event) => {
     setEnteredBSMV(event.target.value);
   };
 
@@ -63,15 +62,15 @@ const InstallmentForm = (props) => {
     console.log(enteredKredi);
     console.log(enteredTaksit);
     console.log(enteredKar);
-    console.log(enteredKKDV);
+    console.log(enteredKKDF);
     console.log(enteredBSMV);
     console.log(enteredAralik);
 
     // krediInputRef.current = enteredKredi;
     // taksitInputref.current = enteredTaksit;
     // karInputref.current = enteredKar;
-    // kkdvInputref.current = enteredKKDV;
-    // bsmvInputref.current = enteredBSMV;
+    // KKDFInputref.current = enteredKKDF;
+    // BSMVInputref.current = enteredBSMV;
   };
 
   return (
@@ -108,9 +107,9 @@ const InstallmentForm = (props) => {
             <div className="flex flex-wrap -mx-3 mb-2">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <Input
-                  ref={kkdvInputref}
-                  label="Vergi Oranı - KKDV"
-                  onChange={kkdvChangeHandler}
+                  ref={KKDFInputref}
+                  label="Vergi Oranı - KKDF"
+                  onChange={KKDFChangeHandler}
                 />
               </div>
               <Select
@@ -120,9 +119,9 @@ const InstallmentForm = (props) => {
               />
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <Input
-                  ref={bsmvInputref}
+                  ref={BSMVInputref}
                   label="Vergi Oranı - BSMV"
-                  onChange={bsmvChangeHandler}
+                  onChange={BSMVChangeHandler}
                 />
               </div>
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 grid place-items-center">
