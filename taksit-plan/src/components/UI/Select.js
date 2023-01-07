@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 
 const Select =  forwardRef((props, ref) => {
-
+  //Select button function. Since it is used only once for choosing 'Aralik', hence it is constructed specifically for that purpose.
   return (
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase  text-gray-700 text-xs font-bold mb-2">
@@ -14,7 +14,6 @@ const Select =  forwardRef((props, ref) => {
         ref={ref}
         value={props.value}
         onChange={props.onChange}
-          // onChange={e => selectRef.current = e.target.value}
 >
           <option value="Aylik">Aylık</option>
           <option value="Haftalik">Haftalık</option>

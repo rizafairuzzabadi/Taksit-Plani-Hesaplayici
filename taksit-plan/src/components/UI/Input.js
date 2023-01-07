@@ -1,17 +1,6 @@
-import React, {useRef, useImperativeHandle, forwardRef} from 'react';
-import UserContext from '../../context/userdatacontext';
+import React, { forwardRef} from 'react';
 
 const Input = forwardRef((props, ref) => {
-    // const activate = () => {
-    //     inputRef.current.focus(); // focus on input
-    // };
-
-    // useImperativeHandle(ref, () => {
-    //     return {
-    //         focus: activate
-    //     }
-    // });
-
     return(
         <React.Fragment>
             <label className="block uppercase text-gray-700 text-xs font-bold mb-2">

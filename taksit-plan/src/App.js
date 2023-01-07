@@ -11,12 +11,14 @@ function App() {
   const [enteredKar, setEnteredKar] = useState("");
   const [enteredKKDF, setEnteredKKDF] = useState("15");
   const [enteredBSMV, setEnteredBSMV] = useState("5");
-  const [enteredAralik, setEnteredAralik] = useState("");
+  const [enteredAralik, setEnteredAralik] = useState("Aylik");
 
-  const [toplam_vade, setToplamVade] = useState(0);
-  const [vade_tutari, setVadeTutari] = useState(0);
-  const [toplam_KKDF, setToplamKKDF] = useState(0);
-  const [toplam_BSMV, setToplamBSMV] = useState(0);
+  const [toplam_vade, setToplamVade] = useState("");
+  const [vade_tutari, setVadeTutari] = useState("");
+  const [toplam_KKDF, setToplamKKDF] = useState("");
+  const [toplam_BSMV, setToplamBSMV] = useState("");
+
+  // this App function contains the MainContext and TableContext useStates, which are passed to the child components via the Context API
 
   return (
     <React.Fragment>

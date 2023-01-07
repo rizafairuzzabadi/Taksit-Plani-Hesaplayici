@@ -5,8 +5,10 @@ import Select from "../UI/Select";
 import TotalOutput from "../Table/ToplamOutput";
 import { MainContext } from "../../context/userdatacontext";
 
+//This is the main form component, which contains the input fields and the TotalOutput component
+
 const InstallmentForm = (props) => {
-  const krediInputRef = useRef();
+  const krediInputRef = useRef(); //using useRef to get the value of the input fields
   const taksitInputref = useRef();
   const karInputref = useRef();
   const KKDFInputref = useRef();
@@ -15,7 +17,7 @@ const InstallmentForm = (props) => {
   const totalRef = useRef();
 
   const {
-    setEnteredAralik,
+    setEnteredAralik, //using useContext to get the values of the input fields
     setEnteredBSMV,
     setEnteredKKDF,
     setEnteredKar,
@@ -30,47 +32,42 @@ const InstallmentForm = (props) => {
   } = useContext(MainContext);
 
   const handleOpenTotal = () => {
-    totalRef.current.openTotal();
+    totalRef.current.openTotal(); //using the ref to open the TotalOutput component
   };
 
   const krediChangeHandler = (event) => {
-    setEnteredKredi(event.target.value);
+    setEnteredKredi(event.target.value);  //using the setEnteredKredi function to set the value of the input field
   };
 
   const taksitChangeHandler = (event) => {
-    setEnteredTaksit(event.target.value);
+    setEnteredTaksit(event.target.value); //using the setEnteredTaksit function to set the value of the input field
   };
 
   const karChangeHandler = (event) => {
-    setEnteredKar(event.target.value);
+    setEnteredKar(event.target.value);  //using the setEnteredKar function to set the value of the input field
   };
 
   const KKDFChangeHandler = (event) => {
-    setEnteredKKDF(event.target.value);
+    setEnteredKKDF(event.target.value); //using the setEnteredKKDF function to set the value of the input field
   };
 
   const BSMVChangeHandler = (event) => {
-    setEnteredBSMV(event.target.value);
+    setEnteredBSMV(event.target.value); //using the setEnteredBSMV function to set the value of the input field
   };
 
   const aralikChangeHandler = (event) => {
-    setEnteredAralik(event.target.value);
+    setEnteredAralik(event.target.value); //using the setEnteredAralik function to set the value of the input field
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
+    //To check whether the inputs are empty or not, or if they are taken correctly or not
     console.log(enteredKredi);
     console.log(enteredTaksit);
     console.log(enteredKar);
     console.log(enteredKKDF);
     console.log(enteredBSMV);
     console.log(enteredAralik);
-
-    // krediInputRef.current = enteredKredi;
-    // taksitInputref.current = enteredTaksit;
-    // karInputref.current = enteredKar;
-    // KKDFInputref.current = enteredKKDF;
-    // BSMVInputref.current = enteredBSMV;
   };
 
   return (
@@ -104,7 +101,7 @@ const InstallmentForm = (props) => {
                 />
               </div>
             </div>
-            <div className="flex flex-wrap -mx-3 mb-2">
+            <div className="flex flex-wrap -mx-3">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <Input
                   ref={KKDFInputref}
