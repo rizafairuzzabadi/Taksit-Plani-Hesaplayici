@@ -31,31 +31,55 @@ const InstallmentForm = (props) => {
     enteredKredi,
   } = useContext(MainContext);
 
+  const isNumber = (input) => {
+    console.log(input)
+    const numberCheck = new RegExp(/([0-9]*[.])?[0-9]+/) //using regex to check if the input is a number, can be improved
+    return numberCheck.test(input)
+  }
+
   const handleOpenTotal = () => {
     totalRef.current.openTotal(); //using the ref to open the TotalOutput component
   };
 
   const krediChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredKredi(event.target.value);  //using the setEnteredKredi function to set the value of the input field
   };
 
   const taksitChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredTaksit(event.target.value); //using the setEnteredTaksit function to set the value of the input field
   };
 
   const karChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredKar(event.target.value);  //using the setEnteredKar function to set the value of the input field
   };
 
   const KKDFChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredKKDF(event.target.value); //using the setEnteredKKDF function to set the value of the input field
   };
 
   const BSMVChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredBSMV(event.target.value); //using the setEnteredBSMV function to set the value of the input field
   };
 
   const aralikChangeHandler = (event) => {
+    if (!isNumber(event.target.value)) {
+      return
+    }
     setEnteredAralik(event.target.value); //using the setEnteredAralik function to set the value of the input field
   };
 
@@ -83,6 +107,7 @@ const InstallmentForm = (props) => {
                 <Input
                   ref={krediInputRef}
                   label="Kredi Tutari / Ana Para"
+                  value={enteredKredi}
                   onChange={krediChangeHandler}
                 />
               </div>
@@ -90,6 +115,7 @@ const InstallmentForm = (props) => {
                 <Input
                   ref={taksitInputref}
                   label="Taksit Sayısı"
+                  value={enteredTaksit}
                   onChange={taksitChangeHandler}
                 />
               </div>
@@ -97,6 +123,7 @@ const InstallmentForm = (props) => {
                 <Input
                   ref={karInputref}
                   label="Kar Oranı"
+                  value={enteredKar}
                   onChange={karChangeHandler}
                 />
               </div>
@@ -106,6 +133,7 @@ const InstallmentForm = (props) => {
                 <Input
                   ref={KKDFInputref}
                   label="Vergi Oranı - KKDF"
+                  value={enteredKKDF}
                   onChange={KKDFChangeHandler}
                 />
               </div>
@@ -118,6 +146,7 @@ const InstallmentForm = (props) => {
                 <Input
                   ref={BSMVInputref}
                   label="Vergi Oranı - BSMV"
+                  value={enteredBSMV}
                   onChange={BSMVChangeHandler}
                 />
               </div>

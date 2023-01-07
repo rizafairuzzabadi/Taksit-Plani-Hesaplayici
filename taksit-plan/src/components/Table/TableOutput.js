@@ -2,6 +2,7 @@ import React, { useContext, forwardRef } from "react";
 import "./TableOutput.css";
 import { MainContext } from "../../context/userdatacontext";
 import { TableContext } from "../../context/tableContext";
+import { toDisplay } from "../../helpers/numberFormat";
 
 //This is the table pop up / modal component. It shows the table when the user clicks the "Tabloyu Göster" button
 
@@ -17,12 +18,14 @@ const InstallmentTable = (props, ref) => {
 
   const { vade_tutari } = useContext(TableContext); //getting the values from the context
 
-  var tableObject = []; //creating an array of objects to store the values to then iterate within the table
-  var anapara = 0;  //principal
-  var kalan_anapara = enteredKredi; //remaining principal
-  var kar_tutari = 0; //profit amount
-  var KKDF_tutari = 0;  //KKDF amount
-  var BSMV_tutari = 0;  //BSMV amount
+  //As the mathematical formula is subject to change, these const variables are not implemented in improved way yet.
+
+  let tableObject = []; //creating an array of objects to store the values to then iterate within the table
+  let anapara = 0;  //principal
+  let kalan_anapara = enteredKredi; //remaining principal
+  let kar_tutari = 0; //profit amount
+  let KKDF_tutari = 0;  //KKDF amount
+  let BSMV_tutari = 0;  //BSMV amount
 
   for (var i = 0; i < enteredTaksit; i++) {
     if (enteredAralik === "Aylik") {  //if the user selected monthly, then the profit amount is calculated as follows
@@ -40,9 +43,9 @@ const InstallmentTable = (props, ref) => {
 
     tableObject[i] = {  //putting the values to the objects array
       taksitno: i + 1,
-      tTutar: parseFloat(vade_tutari).toFixed(2),
-      odenen: parseFloat(anapara).toFixed(2),
-      kalan: parseFloat(kalan_anapara).toFixed(2),
+      tTutar: toDisplay(vade_tutari),
+      odenen: toDisplay(anapara),
+      kalan: toDisplay(kalan_anapara),
       kar: parseFloat(kar_tutari).toFixed(2),
       KKDFvrg: parseFloat(KKDF_tutari).toFixed(2),
       BSMVvrg: parseFloat(BSMV_tutari).toFixed(2),
@@ -88,9 +91,9 @@ const InstallmentTable = (props, ref) => {
               {tableObject.map((item) => (
                 <tr className="text-center">
                   <td>{item.taksitno}</td>
-                  <td>{item.tTutar} TL</td>
-                  <td>{item.odenen} TL</td>
-                  <td>{item.kalan} TL</td>
+                  <td>{item.tTutar}</td>
+                  <td>{item.odenen}</td>
+                  <td>{item.kalan}</td>
                   <td>{item.kar}</td>
                   <td>{item.KKDFvrg}</td>
                   <td>{item.BSMVvrg}</td>
