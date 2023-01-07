@@ -5,6 +5,7 @@
 First, install the required dependables (node_module):
 
 ```bash
+cd taksit-plan
 npm install
 
 ```
